@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Decision Page – QiCard</title>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      margin: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .approve {
+      background-color: #ffc20e;
+      color: black;
+    }
+
+    .approve:hover {
+      background-color: #e6ae00;
+    }
+
+    .reject {
+      background-color: #3b3b3b;
+      color: white;
+    }
+
+    .reject:hover {
+      background-color: #2c2c2c;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/QiCard_logo.png/600px-QiCard_logo.png" alt="QiCard Logo" class="logo" />
+    
+    <div id="buttons">
+      <a id="approveBtn" class="btn approve">Approve</a>
+      <a id="rejectBtn" class="btn reject">Reject</a>
+    </div>
+
+    <div id="errorMessage" class="error" style="display: none;">
+      ⚠️ Missing or invalid message ID.
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const messageId = params.get("messageId");
+
+      if (!messageId) {
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("errorMessage").style.display = "block";
+        return;
+      }
+
+      const baseWebhook = "https://n8n.fininx.com/webhook/approve-archive";
+      document.getElementById("approveBtn").href = `${baseWebhook}?status=approved&messageId=${encodeURIComponent(messageId)}`;
+      document.getElementById("rejectBtn").href = `${baseWebhook}?status=rejected&messageId=${encodeURIComponent(messageId)}`;
+    });
+  </script>
+</body>
+</html>
