@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <title>Decision Page – QiCard</title>
   <style>
+
+    
     body {
       background-color: #fff;
       font-family: 'Segoe UI', sans-serif;
@@ -54,12 +56,26 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/QiCard_logo.png/600px-QiCard_logo.png" alt="QiCard Logo" class="logo" />
-    <div>
-      <button class="btn approve">Approve</button>
-      <button class="btn reject">Reject</button>
-    </div>
-  </div>
+  <div>
+  <button class="btn approve" onclick="sendDecision('approve')">Approve</button>
+  <button class="btn reject" onclick="sendDecision('reject')">Reject</button>
+</div>
+</div>
+
+<script>
+  function sendDecision(status) {
+    fetch("https://n8n.fininx.com/webhook/decision-handler", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ decision: status })
+    }).then(res => {
+      alert(`Decision sent: ${status}`);
+    });
+  }
+</script>
+
 </body>
-</html> 
+</html>
+
