@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <title>Decision Page – QiCard</title>
   <style>
-
-    
     body {
       background-color: #fff;
       font-family: 'Segoe UI', sans-serif;
@@ -37,7 +35,7 @@
     }
 
     .approve {
-      background-color: #ffc20e; /* QiCard yellow */
+      background-color: #ffc20e;
       color: black;
     }
 
@@ -46,7 +44,7 @@
     }
 
     .reject {
-      background-color: #3b3b3b; /* QiCard dark */
+      background-color: #3b3b3b;
       color: white;
     }
 
@@ -56,26 +54,54 @@
   </style>
 </head>
 <body>
-  <div>
-  <button class="btn approve" onclick="sendDecision('approve')">Approve</button>
-  <button class="btn reject" onclick="sendDecision('reject')">Reject</button>
-</div>
-</div>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/QiCard_logo.png/600px-QiCard_logo.png" alt="QiCard Logo" class="logo" />
+    <div>
+      <button class="btn approve" onclick="sendDecision('approved')">Approve</button>
+      <button class="btn reject" onclick="sendDecision('rejected')">Reject</button>
+    </div>
+  </div>
 
-<script>
-  function sendDecision(status) {
-    fetch("https://n8n.fininx.com/webhook/decision-handler", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ decision: status })
-    }).then(res => {
-      alert(`Decision sent: ${status}`);
-    });
-  }
-</script>
+  <script>
+    // استخراج message_id من الرابط
+    function getMessageId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("message_id");
+    }
 
+    // إرسال القرار إلى n8n
+    function sendDecision(status) {
+      const messageId = getMessageId();
+      if (!messageId) {
+        alert("Message ID is missing in the URL!");
+        return;
+      }
+
+      // تعطيل الأزرار بعد أول ضغطة
+      document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+
+      fetch("https://n8n.fininx.com/webhook/decision-handler", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          status: status,
+          message_id: messageId
+        })
+      }).then(res => {
+        if (res.ok) {
+          alert(`Sent: ${status}`);
+        } else {
+          alert("Error sending decision");
+          document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+        }
+      }).catch(err => {
+        alert("Error sending decision");
+        console.error(err);
+        document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+      });
+    }
+  </script>
 </body>
 </html>
-
