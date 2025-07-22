@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Decision Page – QiCard</title>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      margin: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .approve {
+      background-color: #ffc20e; /* QiCard yellow */
+      color: black;
+    }
+
+    .approve:hover {
+      background-color: #e6ae00;
+    }
+
+    .reject {
+      background-color: #3b3b3b; /* QiCard dark */
+      color: white;
+    }
+
+    .reject:hover {
+      background-color: #2c2c2c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/QiCard_logo.png/600px-QiCard_logo.png" alt="QiCard Logo" class="logo" />
+    <div>
+      <button class="btn approve">Approve</button>
+      <button class="btn reject">Reject</button>
+    </div>
+  </div>
+</body>
+</html> 
