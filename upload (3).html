@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Your File – QiCard</title>
+  <style>
+    body {
+      background-color: #ffc20e ;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .upload-container {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .upload-container img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #ffc20e;
+      color: #000;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e0ac00;
+    }
+  </style>
+</head>
+<body>
+  <div class="upload-container">
+    <img src="https://upload.wikimedia.org/wikipedia/ar/2/2b/QiCard_logo.png" alt="QiCard Logo">
+    <h2>Upload Your File</h2>
+    <form action="https://n8n.fininx.com/webhook-test/notify" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" required><br>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+</body>
+</html>
