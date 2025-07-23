@@ -63,20 +63,21 @@
       <input type="file" name="file" required><br>
       <button type="submit">Upload</button>
     </form> -->
+    
 <form id="uplForm" enctype="multipart/form-data">
   <input type="file" name="file" id="file" required><br>
   <input type="hidden" name="messageId" id="messageId">
-  <input type="hidden" name="department" id="department">
+<!--   <input type="hidden" name="department" id="department"> -->
   <button type="submit">Upload</button>
 </form>
 <script>
-  // Extract parameters from URL
+  
   const params = new URLSearchParams(window.location.search);
   document.getElementById('messageId').value = params.get('messageId') || '';
-  document.getElementById('department').value = params.get('department') || '';
+  // document.getElementById('department').value = params.get('department') || '';
 
-  // POST to n8n (use the production URL for production, or webhook-test for test)
-  const url = "https://n8n.fininx.com/webhook-test/notify"; // Change to "/webhook/notify" for prod
+  
+  const url = "https://n8n.fininx.com/webhook-test/notify"; 
 
   document.getElementById('uplForm').addEventListener('submit', async (e) => {
     e.preventDefault();
