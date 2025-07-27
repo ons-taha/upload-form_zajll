@@ -68,6 +68,7 @@
   <input type="file" name="file" id="file" required><br>
   <input type="hidden" name="messageId" id="messageId">
   <input type="hidden" name="conversationId" id="conversationId">
+  <input type="hidden" name="webLink" id="webLink">
 
 <!--   <input type="hidden" name="department" id="department"> -->
   <button type="submit">Upload</button>
@@ -77,6 +78,8 @@
   const params = new URLSearchParams(window.location.search);
   document.getElementById('messageId').value = params.get('messageId') || '';
   document.getElementById('conversationId').value = params.get('conversationId') || '';
+  document.getElementById('webLink').value = params.get('webLink') || '';
+
 
   // document.getElementById('department').value = params.get('department') || '';
 
