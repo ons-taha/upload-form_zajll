@@ -80,6 +80,8 @@
     document.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
       const messageId = params.get("messageId");
+      const webLink = params.get("webLink");
+
 
       if (!messageId) {
         document.getElementById("buttons").style.display = "none";
@@ -88,8 +90,9 @@
       }
 
       const baseWebhook = "https://n8n.fininx.com/webhook/approve-archive";
-      document.getElementById("approveBtn").href = `${baseWebhook}?status=approved&messageId=${encodeURIComponent(messageId)}`;
-      document.getElementById("rejectBtn").href = `${baseWebhook}?status=rejected&messageId=${encodeURIComponent(messageId)}`;
+document.getElementById("approveBtn").href = `${baseWebhook}?status=approved&messageId=${encodeURIComponent(messageId)}&webLink=${encodeURIComponent(webLink)}`;
+document.getElementById("rejectBtn").href = `${baseWebhook}?status=rejected&messageId=${encodeURIComponent(messageId)}&webLink=${encodeURIComponent(webLink)}`;
+
     });
   </script>
 </body>
